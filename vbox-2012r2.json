@@ -7,6 +7,7 @@
         [ "modifyvm", "{{.Name}}", "--vram", "128" ],
         [ "modifyvm", "{{.Name}}", "--cpus", "4" ]
       ],
+      "disk_size": 80000,
       "guest_additions_mode": "{{ user `guest_additions_mode` }}",
       "guest_additions_path": "C:/users/vagrant/VBoxGuestAdditions.iso",
       "guest_os_type": "Windows2012_64",
