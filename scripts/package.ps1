@@ -8,13 +8,23 @@ netsh advfirewall firewall add rule name="Remote Desktop" dir=in localport=3389 
 Update-ExecutionPolicy -Policy Unrestricted
 
 if (Test-Command -cmdname 'Uninstall-WindowsFeature') {
-    Write-BoxstarterMessage "Removing unused features..."
-    Remove-WindowsFeature -Name 'Powershell-ISE'
-#    Get-WindowsFeature | 
-#    ? { $_.InstallState -eq 'Available' } | 
-#    Uninstall-WindowsFeature -Remove
-}
+  # need to install certain features to preserve them, as the remove block
+  # below breaks the ability to install them afterwards
+  Write-BoxstarterMessage "Installing required features..."
+  Install-WindowsFeature -Name IIS-WebServerRoleIIS-WebServer
+  Install-WindowsFeature -Name IIS-ISAPIFilter
+  Install-WindowsFeature -Name IIS-ISAPIExtensions
+  Install-WindowsFeature -Name NetFx4Extended-ASPNET45
+  Install-WindowsFeature -Name IIS-NetFxExtensibility45
+  Install-WindowsFeature -Name IIS-ASPNET45
+  Install-WindowsFeature -Name IIS-ASP
 
+  Write-BoxstarterMessage "Removing unused features..."
+  Remove-WindowsFeature -Name 'Powershell-ISE'
+  Get-WindowsFeature | 
+  ? { $_.InstallState -eq 'Available' } | 
+  Uninstall-WindowsFeature -Remove
+}
 
 Install-WindowsUpdate -AcceptEula
 
