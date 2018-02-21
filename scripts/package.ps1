@@ -11,13 +11,18 @@ if (Test-Command -cmdname 'Uninstall-WindowsFeature') {
   # need to install certain features to preserve them, as the remove block
   # below breaks the ability to install them afterwards
   Write-BoxstarterMessage "Installing required features..."
-  Install-WindowsFeature -Name IIS-WebServerRoleIIS-WebServer
-  Install-WindowsFeature -Name IIS-ISAPIFilter
-  Install-WindowsFeature -Name IIS-ISAPIExtensions
-  Install-WindowsFeature -Name NetFx4Extended-ASPNET45
-  Install-WindowsFeature -Name IIS-NetFxExtensibility45
-  Install-WindowsFeature -Name IIS-ASPNET45
-  Install-WindowsFeature -Name IIS-ASP
+  Install-WindowsFeature -Name Web-Server
+  Install-WindowsFeature -Name Web-Http-Redirect
+  Install-WindowsFeature -Name Web-Basic-Auth
+  Install-WindowsFeature -Name Web-Client-Auth
+  Install-WindowsFeature -Name Web-Cert-Auth
+  Install-WindowsFeature -Name Web-Net-Ext45
+  Install-WindowsFeature -Name Web-ASP
+  Install-WindowsFeature -Name Web-Asp-Net45
+  Install-WindowsFeature -Name Web-ISAPI-Ext
+  Install-WindowsFeature -Name Web-ISAPI-Filter
+  Install-WindowsFeature -Name Web-Ftp-Server
+  Install-WindowsFeature -Name Web-Mgmt-Tools
 
   Write-BoxstarterMessage "Removing unused features..."
   Remove-WindowsFeature -Name 'Powershell-ISE'
