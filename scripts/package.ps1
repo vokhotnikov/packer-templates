@@ -24,11 +24,11 @@ if (Test-Command -cmdname 'Uninstall-WindowsFeature') {
   Install-WindowsFeature -Name Web-Ftp-Server
   Install-WindowsFeature -Name Web-Mgmt-Tools
 
-  Write-BoxstarterMessage "Removing unused features..."
-  Remove-WindowsFeature -Name 'Powershell-ISE'
-  Get-WindowsFeature | 
-  ? { $_.InstallState -eq 'Available' } | 
-  Uninstall-WindowsFeature -Remove
+#  Write-BoxstarterMessage "Removing unused features..."
+#  Remove-WindowsFeature -Name 'Powershell-ISE'
+#  Get-WindowsFeature | 
+#  ? { $_.InstallState -eq 'Available' } | 
+#  Uninstall-WindowsFeature -Remove
 }
 
 Install-WindowsUpdate -AcceptEula
